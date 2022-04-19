@@ -2,13 +2,13 @@
     "name": "perspectives-highlightjs",
     "version": "0.0.0",
     "description": "Perspectives ARC syntax highlighting plugin for highlight.js",
-    "main": "src/perspectives-arc.js",
+    "main": "src/languages/perspectives-arc.js",
     "scripts": {
-      "test": "./node_modules/.bin/mocha --reporter spec"
+      "build": "webpack"
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/highlightjs/highlightjs-cypher.git"
+      "url": "https://github.com/joopringelberg/perspectives-highlightjs.git"
     },
     "keywords": [
       "Perspectives",
@@ -22,13 +22,18 @@
         "name" : "Joop Ringelberg",
         "email" : "joopringelberg@perspect.it"
       },
-    "homepage": "https://github.com/highlightjs/highlightjs-cypher#readme",
+    "homepage": "https://github.com/joopringelberg/perspectives-highlightjs.git#readme",
     "devDependencies": {
       "highlight.js": "^10.7.2",
       "mocha": "^5.2.0",
       "should": "^13.2.3"
     },
     "dependencies": {
-      "minimist": "^1.2.5"
+      "minimist": "^1.2.5",
+      "@babel/cli": "^7.12.1",
+      "@babel/core": "^7.12.3",
+      "@babel/preset-env": "^7.12.1",
+      "webpack": "^5.4.0",
+      "webpack-cli": "^4.2.0"
     }
   }
