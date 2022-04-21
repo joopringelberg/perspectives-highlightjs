@@ -4,7 +4,11 @@ This is the README for the contributed (3rd party) language definition "perspect
 
 ## Getting it
 
-Go to the [latest release](https://github.com/joopringelberg/perspectives-highlightjs.git/releases) (on Github: Code tab, section releases on the right, click `latest`). 
+Install with npm:
+
+```
+npm install git+https://github.com/joopringelberg/perspectives-highlightjs.git
+```
 
 ## Using it
 
@@ -36,57 +40,59 @@ Obviously, you'll need at least one base16 stylesheet:
 Assuming some bundler (e.g. Webpack), install the following (note this installs highlight with all standard languages!):
 
 ```
-npm install react, react-dom, highlight.js, react-highlight
+npm install react, react-dom, highlight.js
 npm install git+https://github.com/joopringelberg/perspectives-highlightjs.git
 ```
 
-Then bundle using Webpack. Here is a complete code example:
+Here is a complete code example:
 
 ```
-import React from 'react'
-import { render } from 'react-dom'
-
-// Import Highlight React component.
-// From https://github.com/akiran/react-highlight
-import Highlight from 'react-highlight'
+import React from "react";
+import {render} from 'react-dom';
 
 // Import highlight library (NOTE: this is the complete module, can be done with smaller footprint!)
 // https://highlightjs.readthedocs.io/en/latest/readme.html#es6-modules-import
 import hljs from 'highlight.js';
 
 // Import perspectives-arc as a third party language
-import {perspectivesarc} from perspectives-arc;
+import perspectivesarc from 'perspectives-highlightjs';
+
+// Import a stylesheet
+import "highlight.js/styles/base16/solar-flare.css";
 
 // Register the language, so it can be used as a value for the language prop.
-hljs.registerLanguage("perspectives-arc", perspectivesarc.default); 
+hljs.registerLanguage("perspectives-arc", perspectivesarc); 
 
 const arcSource = "-- Copyright Joop Ringelberg and Cor Baars 2019, 2020, 2021\ndomain SimpleChat\n  use sys for model:System\n\n  case Model\n    aspect sys:Model\n    external\n      aspect sys:Model$External\n";
 
-const App = () => (
-  <div>
-    <Highlight language="perspectives-arc">
-      {arcSource}
-    </Highlight>
-  </div>
-)
+class App extends React.Component
+{
+    componentDidMount()
+    {
+        hljs.highlightAll();
+    }
+    componentDidChange()
+    {
+        hljs.highlightAll();
+    }
+
+    render()
+    {
+        return <pre><code className="perspectives-arc">{arcSource}</code></pre>
+    }
+
+}
 
 render(<App />, document.getElementById('root'))
-
 ```
-
-
-## Example files
 
 ## Release Notes
 
-### 0.0.0
+### 1.0.0
 Initial release.
 
 ## Requirements
-
-## Extension Settings
-
-This language extension as no specific settings.
+This package depends on [highlightjs](https://github.com/highlightjs/highlight.js).
 
 ## Known Issues
 
