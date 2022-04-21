@@ -6,9 +6,73 @@ This is the README for the contributed (3rd party) language definition "perspect
 
 Go to the [latest release](https://github.com/joopringelberg/perspectives-highlightjs.git/releases) (on Github: Code tab, section releases on the right, click `latest`). 
 
-## Installing it
+## Using it
 
-## Uninstalling it
+### In a HTML page
+The `dist` file contains an umd module. This you can include in your page as follows:
+
+```
+  <script src="path/to/highlight.js"></script>
+  <script src="another/path/to/perspectives-arc.js"></script>
+  <script>
+    hljs.registerLanguage("perspectives-arc", perspectivesarc.default); 
+    hljs.highlightAll();
+  </script>
+```
+
+The last script line registers the module default export with `highlightjs` (bound to a global variable by the `highlight.js` script). In your html file, include an element that contains the ARC code and set the language property on it:
+
+```
+<textarea class="perspectives-arc">domain MyModel</textarea>
+```
+
+Obviously, you'll need at least one base16 stylesheet:
+
+```
+<link rel="stylesheet" href="/path/to/styles/default.min.css">
+```
+
+### Using React
+Assuming some bundler (e.g. Webpack), install the following (note this installs highlight with all standard languages!):
+
+```
+npm install react, react-dom, highlight.js, react-highlight
+npm install git+https://github.com/joopringelberg/perspectives-highlightjs.git
+```
+
+Then bundle using Webpack. Here is a complete code example:
+
+```
+import React from 'react'
+import { render } from 'react-dom'
+
+// Import Highlight React component.
+// From https://github.com/akiran/react-highlight
+import Highlight from 'react-highlight'
+
+// Import highlight library (NOTE: this is the complete module, can be done with smaller footprint!)
+// https://highlightjs.readthedocs.io/en/latest/readme.html#es6-modules-import
+import hljs from 'highlight.js';
+
+// Import perspectives-arc as a third party language
+import {perspectivesarc} from perspectives-arc;
+
+// Register the language, so it can be used as a value for the language prop.
+hljs.registerLanguage("perspectives-arc", perspectivesarc.default); 
+
+const arcSource = "-- Copyright Joop Ringelberg and Cor Baars 2019, 2020, 2021\ndomain SimpleChat\n  use sys for model:System\n\n  case Model\n    aspect sys:Model\n    external\n      aspect sys:Model$External\n";
+
+const App = () => (
+  <div>
+    <Highlight language="perspectives-arc">
+      {arcSource}
+    </Highlight>
+  </div>
+)
+
+render(<App />, document.getElementById('root'))
+
+```
 
 
 ## Example files
@@ -35,64 +99,26 @@ Highlightjs uses a different meta-format to specify a tokenizer. We try to imple
 
 
 ## The Highlightjs-base16 mapping
-AANPASSEN!!
 
-The table below has been derived from the template file [default.moustache](https://github.com/chriskempson/base16-textmate/blob/master/templates/default.mustache) in the Base16 repository on Github.
+The table below has been derived from the template file [default.moustache](https://github.com/highlightjs/base16-highlightjs/blob/main/templates/default.mustache) in the Highlightjs Base16 repository on Github.
 
-|Base16 color variable|Textmate name|Textmate scope names|
-|---|---|---|
-|base02|Separator|meta-separator|
-|base03|Comments|comment, punctuation.definition.comment|
-||Unimplemented|invalid.unimplemented||
-|base04|selectionForeground| `a gutterSettings key`|
-|base05|Text|variable.parameter.function
-||Punctuation|punctuation.definition.string, punctuation.definition.variable, punctuation.definition.string, punctuation.definition.parameters, punctuation.definition.string, punctuation.definition.array|
-||Delimiters||
-||Operators|keyword.operator|
-||Separator|meta.separator|
-|base06|||
-|base07|Classes|meta.class|
-||Illegal|invalid.illegal (`foreground`)|
-||Depracated|invalid.deprecated (`foreground`)|
-||Unimplemented|invalid.unimplemented|
-|base08|Illegal|invalid.illegal (`background`)|
-||Variables|variable|
-||Tags|entity.name.tag|
-||Link text|string.other.link, punctuation.definition.string.end.markdown, punctuation.definition.string.begin.markdown|
-||Lists|markup.list|
-||Deleted|markup.deleted|
-||Illegal|invalid.illegal (`background`)|
-|base09|Integers|constant.numeric|
-||Floats||
-||Boolean||
-||Constants|constant|
-||Attributes|entity.other.attribute-name|
-||Values||
-||Units|keyword.other.unit|
-||Link url|meta.link|
-||Quotes|markup.quote|
-||Broken|invalid.broken|
-|base0A|Bold|markup.bold, punctuation.definition.bold|
-||Classes|support.class, entity.name.class, entity.name.type.class|
-|base0B|Strings, Inherited Class|string, constant.other.symbol, entity.other.inherited-class|
-||Code|markup.raw.inline|
-||Inserted|markup.inserted|
-|base0C|Support|support.function|
-||Colors|constant.other.color|
-||Regular expressions|string.regexp|
-||Escape charactes|constant.character.escape|
-|base0D|Headings|markup.heading punctuation.definition.heading, entity.name.section|
-||Methods|keyword.other.special-method|
-||Attribute Ids|entity.other.attribute-name.id, punctuation.definition.entity|
-||Headings|markup.heading punctuation.definition.heading, entity.name.section|
-|base0E|Keywords|keyword|
-||Storage|storage|
-||Selector|meta.selector|
-||Italic|markup.italic, punctuation.definition.italic|
-||Changed|markup.changed|
-||Embedded|punctuation.section.embedded, variable.interpolation|
-|base0F|Labels|entity.name.label|
-||Deprecated|invalid.deprecated (`background`)|
+We choose a single highlight scope name (style) to represent a particular base16 color.
+
+|base16 color variable|Highlightjs scope name|
+|---|---|
+|base03|comment|
+|base04|tag|
+|base05|operator|
+|base06||
+|base07||
+|base08|variable|
+|base09|number|
+|base0A|title|
+|base0B|string|
+|base0C|regexp|
+|base0D|title.function|
+|base0E|keyword|
+|base0F|meta|
 
 ## ARC categories
 The table below gives a grouping of ARC keywords. The TOKENIZER RULE defines semantically appropriate groups of keywords as they are lumped together by our tokenizer for ARC. These are lumped together in even larger groups (under COLOR GROUP), where a Base64 color is assigned to each COLOR GROUP. In other words, the table gives the mapping from tokenizer rules to Base16 colors.
@@ -129,37 +155,39 @@ The table below gives a grouping of ARC keywords. The TOKENIZER RULE defines sem
 |Meta|Meta|aspect, use, indexed|base05|
 
 ## Tokenizer scope names
-Finally, we can assemble the table that gives each of our tokenizer rules (the entries under "patterns" in the `arc.tmLanguage.json` file) a value for its "name" property (taken from the default scope names). Note that there is considerable arbitrariness in this assignment, as we link on Base16 color variable names and these appear in more than one Textmate scope name.
+Instead of using the higlightjs scope names directly, we've defined variables in the (javascript) `perspectives-arc.js` file for each of the base16 colors. These variable names are used to bind colors to tokenizer rules, e.g.:
 
-|TOKENIZER RULE|BASE64|HIGHLIGHTJS SCOPE NAME|
-|---|---|---|
-|Context kinds|base0A|entity.name.class|
-|Role kinds|base0B|entity.other.inherited-class|
-|User role|base03|comment|
-|Property|base08|entity.name.tag|
-|Property facet|base08|entity.name.tag|
-|Perspective|base0D|keyword.other.special-method|
-|State|base0E|keyword|
-|State transition|base0E|keyword|
-|Notification|base0E|keyword|
-|Automatic action|base0E|keyword|
-|Assignment|base0E|keyword|
-|Boolean|base09|constant|
-|Date|base09|constant|
-|Number|base09|constant|
-|Property Range|base09|constant|
-|Regular expression|base09|constant|
-|Operators|base0C|support.function|
-|Let|base0C|support.function|
-|Standard Variables|base03|comment|
-|Role verbs|base0F|entity.name.label|
-|Property Verbs|base0F|entity.name.label|
-|Meta|base05|keyword.operator|
+```
+const contexts = {
+    scope: base0A,
+    match: /\b(domain|case|party|activity)\b/,
+};
+```
 
 # Development
+Adapt `perspectives-arc.js`. Then run 
+
+```
+npm run build
+```
+
+or run 
+
+```
+npm run watch
+```
+
+to have your changes incorporated automatically while you develop.
+
+## Packaging, Releasing
+There is no explicit packaging. Follow these steps to publish a new version:
+* set the new version number in the package file.
+* push all changes to github.
+* create a new tag, use the semantic version number preceded by 'v', e.g. `v0.1.0`.
+* push the tag on the command line (vscode won't do it):
+
+```
+git push origin <tagname>
+```
 
 
-## Package for distribution
-
-## Releasing
-Follow these steps:
