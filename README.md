@@ -183,7 +183,26 @@ or run
 npm run watch
 ```
 
-to have your changes incorporated automatically while you develop.
+to have your changes incorporated automatically while you develop. 
+
+Test by using the page `develop.html` from `highlight.js`. 
+
+## develop.html
+This is a file in the highlight.js package that you can open in the browser. It shows a code box to enter ARC code in, a language selector and a theme selector. Customize this file as follows to be able to test ARC models:
+
+* Add `perspectives-arc` as a third party language by including this script:
+```
+<script src="../extra/perspectives-arc/dist/perspectives-arc.js"></script>
+```
+* When the document is ready, register `perspectivs-arc`:
+```
+$(document).ready(function() {
+      hljs.registerLanguage("perspectives-arc", perspectivesarc.default);
+```
+* For convenience, add the class "perspectives-arc" to the textarea that forms the code box:
+```
+<textarea class="perspectives-arc">domain MyModel</textarea>
+```
 
 ## Packaging, Releasing
 There is no explicit packaging. Follow these steps to publish a new version:
