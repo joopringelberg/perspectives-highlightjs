@@ -136,7 +136,6 @@ The table below gives a grouping of ARC keywords. The TOKENIZER RULE defines sem
 |---|---|---|---|
 |Contexts|Context kinds|domain, case, party, activity|base0A|
 |Roles|Role kinds|external, thing, context|base0B|
-|||extern ||
 |||View||
 |||filledBy||
 |User role|User role|user|base03|
@@ -154,7 +153,7 @@ The table below gives a grouping of ARC keywords. The TOKENIZER RULE defines sem
 ||number|||
 ||regular expression|||
 ||Property Range|String, Boolean, DateTime, Number||
-|Expressions|Operators|either, both, binds, matches, and, or, not, exists, available, boundBy, binder, context|base0C|
+|Expressions|Operators|either, both, binds, matches, and, or, not, exists, available, boundBy, binder, context, extern|base0C|
 |||filter…with||
 |||>>=, >>, *, /, +, -, ==, >=, <, >=, >||
 ||Let|letA, letE||

@@ -45,7 +45,7 @@ const contexts = {
 // ROLE KINDS (NOT USER) (base0B)
 const roles ={
     scope: base0B,
-    match: /\b(external|thing|context|extern)\b/
+    match: /\b(external|thing|context)\b/
 };
 
 // USER ROLE IS SPECIAL (role name gets base03)
@@ -159,7 +159,7 @@ const regexp = {
 
 // OPERATORS
 const alphabeticOperator = {
-    begin: /\b(either|both|binds|matches|and|or|not|exists|available|boundBy|binder|context)\b/,
+    begin: /\b(either|both|binds|matches|and|or|not|exists|available|boundBy|binder|context|extern)\b/,
     scope: base0C
 };
 
@@ -172,7 +172,7 @@ const filter = {
 };
 
 const nonAlphabeticOperator = {
-    begin: /\b(\>\>\=|\>\>|\*|\/|\+|\-|\=\=|\>\=|\<|>\=|>)\b/,
+    begin: /\>\>\=|\>\>|\*|\/|\+|\-|\=\=|\>\=|\<|>\=|>/,
     scope: base0C
 };
 
