@@ -214,12 +214,26 @@ const use = {
     }
 };
 
+const blockComment = {
+    scope: base03,
+    begin: /\{-/,
+    end: /-\}/
+};
+
 export default function(hljs) {
+    // COMMENT
+    const simpleComment = hljs.COMMENT('--', '$');
+
+
     return {
       name: "Perspectives ARC",
       case_insensitive: false,
       contains: 
-        [ contexts
+        [ hljs.QUOTE_STRING_MODE
+        , hljs.APOS_STRING_MODE
+        , simpleComment
+        , blockComment
+        , contexts
         , roles
         , user
         , property

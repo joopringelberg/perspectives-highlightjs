@@ -91,6 +91,9 @@ render(<App />, document.getElementById('root'))
 ### 1.0.0
 Initial release.
 
+### 1.1.0
+Added line comments and block comments.
+
 ## Requirements
 This package depends on [highlightjs](https://github.com/highlightjs/highlight.js).
 
