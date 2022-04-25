@@ -99,7 +99,8 @@ This package depends on [highlightjs](https://github.com/highlightjs/highlight.j
 
 ## Known Issues
 
-There are currently no known issues.
+* filledBy is not tokenized
+* Improvement: make `relational` etc the same color as Verbs; use the freed up color for User identifiers.
 
 # Syntax coloring for Perspectives
 We have syntax coloring for vscode and for Atom. Both use the TextMate approach to colorize source files. The TextMate approach is based on rules that are a combination of named regular expressions to select a part of the source text (the `scope`) and a string that identifies a particular style to format it. We follow a scope naming regime that makes [Base16](http://chriskempson.com/projects/base16/) themes applicable.

@@ -44,8 +44,10 @@ const contexts = {
 
 // ROLE KINDS (NOT USER) (base0B)
 const roles ={
-    scope: base0B,
-    match: /(?<=\n\s*)\b(external|thing|context)\b/
+    begin: /(\n\s*)\b(external|thing|context)\b/,
+    beginScope: {
+        2: base08
+    }
 };
 
 // USER ROLE IS SPECIAL (role name gets base03)
