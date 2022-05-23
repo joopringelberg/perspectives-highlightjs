@@ -111,6 +111,11 @@ const automaticAction = {
     }
 };
 
+const timing = {
+    scope: base0E,
+    begin: /\b(after|until|every|maximally|times)\b/
+}
+
 // ASSIGNMENT
 const remove = {
     begin: [lexeme("remove"), whitespace, /\b(role|context)\b/],
@@ -158,6 +163,11 @@ const regexp = {
     begin: /\/.*\//,
     scope: base09
 };
+
+const timeConstants = {
+    begin: /Milliseconds|Seconds|Minutes|Hours|Days/,
+    scope: base09
+}
 
 // OPERATORS
 const alphabeticOperator = {
@@ -246,10 +256,11 @@ export default function(hljs) {
         , stateTransition
         , notification
         , automaticAction
+        , timing
         , remove
         , create
         , deleteStatement
-        , boolean, date, number, regexp
+        , boolean, date, number, regexp, timeConstants
         , alphabeticOperator
         , filter
         , nonAlphabeticOperator

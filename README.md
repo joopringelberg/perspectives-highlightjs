@@ -94,6 +94,13 @@ Initial release.
 ### 1.1.0
 Added line comments and block comments.
 
+### 1.2.0
+Extension for timing facets of automatic actions and notifications:
+
+* The keywords after, until, every, maximally and times get the same color as the other keywords in automatic actions.
+* The time constants Milliseconds, Seconds, Minutes, Hours and Days get the same color as simple values.
+
+
 ## Requirements
 This package depends on [highlightjs](https://github.com/highlightjs/highlight.js).
 
@@ -149,11 +156,13 @@ The table below gives a grouping of ARC keywords. The TOKENIZER RULE defines sem
 ||Automatic action|do [for <user>]||
 ||Assignment|remove, delete, create, etc.||
 |||action||
+||Timing|after, until, every, maximally, times||
 |Simple values|Boolean|true, false|base09|
 ||date|||
 ||number|||
 ||regular expression|||
 ||Property Range|String, Boolean, DateTime, Number||
+||Time constants|Milliseconds, Seconds, Minutes, Hours, Days||
 |Expressions|Operators|either, both, binds, matches, and, or, not, exists, available, boundBy, binder, context, extern|base0C|
 |||filter…with||
 |||>>=, >>, *, /, +, -, ==, >=, <, >=, >||
@@ -188,10 +197,10 @@ npm run watch
 
 to have your changes incorporated automatically while you develop. 
 
-Test by using the page `develop.html` from `highlight.js`. 
+Test by using the page `developer.html` from `highlight.js` (see next paragraph). 
 
-## develop.html
-This is a file in the highlight.js package that you can open in the browser. It shows a code box to enter ARC code in, a language selector and a theme selector. Customize this file as follows to be able to test ARC models:
+## developer.html
+This is a file in the highlight.js package (tools directory) that you can open in the browser. It shows a code box to enter ARC code in, a language selector and a theme selector. Customize this file as follows to be able to test ARC models:
 
 * Add `perspectives-arc` as a third party language by including this script:
 ```
