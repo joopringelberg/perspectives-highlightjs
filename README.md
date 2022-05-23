@@ -95,6 +95,9 @@ Initial release.
 Added line comments and block comments.
 
 ### 1.2.0
+Technical improvement: removed lookbehind for Safari.
+
+### 1.3.0
 Extension for timing facets of automatic actions and notifications:
 
 * The keywords after, until, every, maximally and times get the same color as the other keywords in automatic actions.
