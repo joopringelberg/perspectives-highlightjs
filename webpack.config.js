@@ -1,6 +1,20 @@
 const path = require("path");
 
-module.exports = {
+const nodeConfig = {
+  entry: path.join(__dirname, "src/languages/perspectives-arc.js" ),
+  output: {
+    library: {
+      type: 'commonjs2'
+    },
+    path: path.join(__dirname, "dist"),
+    filename: 'perspectives-arc.node.js',
+  },
+  watch: false,
+  mode: "development",
+  target: 'node',
+};
+
+const webConfig = {
   entry: path.join(__dirname, "src/languages/perspectives-arc.js" ),
   output: {
     library: "perspectivesarc",
@@ -15,3 +29,5 @@ module.exports = {
     rules: []
   }
 };
+
+module.exports = [nodeConfig, webConfig]
