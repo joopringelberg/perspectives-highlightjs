@@ -1,3 +1,5 @@
+import { LanguageFn } from 'highlight.js';
+
 /*
 Language: Perspectives ARC
 Author: Joop Ringelberg <joopringelberg@perspect.it>
@@ -29,7 +31,7 @@ const whitespace = /\s+/;
 
 const identifier = /\w+/;
 
-function lexeme(w)
+function lexeme(w : string)
 {
     return new RegExp( "\\b" + w + "\\b");
 }
@@ -232,10 +234,9 @@ const blockComment = {
     end: /-\}/
 };
 
-export default function(hljs) {
+const perspectivesArc: LanguageFn = function(hljs) {
     // COMMENT
     const simpleComment = hljs.COMMENT('--', '$');
-
 
     return {
       name: "Perspectives ARC",
@@ -272,4 +273,6 @@ export default function(hljs) {
         , use
         ]
     }
-  };
+};
+
+export default perspectivesArc;

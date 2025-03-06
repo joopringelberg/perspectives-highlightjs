@@ -1,26 +1,16 @@
-const path = require("path");
 
-const nodeConfig = {
-  entry: path.join(__dirname, "src/languages/perspectives-arc.js" ),
+
+export default  {
+  entry: new URL("src/languages/perspectives-arc.js", import.meta.url).pathname,
   output: {
+    filename: "perspectives-arc.jsm",
+    path: new URL("dist", import.meta.url).pathname,
     library: {
-      type: 'commonjs2'
-    },
-    path: path.join(__dirname, "dist"),
-    filename: 'perspectives-arc.node.js',
+      type: 'module'
+    }
   },
-  watch: false,
-  mode: "development",
-  target: 'node',
-};
-
-const webConfig = {
-  entry: path.join(__dirname, "src/languages/perspectives-arc.js" ),
-  output: {
-    library: "perspectivesarc",
-    libraryTarget: "umd",
-    filename: "perspectives-arc.js",
-    path: path.join(__dirname, "dist")
+  experiments: {
+    outputModule: true
   },
   watch: false,
   mode: "development",
@@ -29,5 +19,3 @@ const webConfig = {
     rules: []
   }
 };
-
-module.exports = [nodeConfig, webConfig]
